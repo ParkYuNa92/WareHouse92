@@ -1,0 +1,28 @@
+package basic;
+
+public class Test {
+
+	public static void main(String[] args) {
+		System.out.println("안녕하세요");
+		System.out.println("컨트롤 스페이스");
+		
+		int a = 7;
+		float c = 3.7f;
+		double d = 4.24;
+		double f = 4.28d;
+		
+		System.out.println("실수 더블형 데이터 d의 값은 "+ d);
+		
+		
+//		1)정수형 변수 선언 후 100의 값을 저장하고 그 결과를 화면에 출력하세요.
+		
+		int x = 100;
+		System.out.println(x);
+		
+		String str="안녕하세요";
+		System.out.println(str);
+
+
+	}
+
+}
