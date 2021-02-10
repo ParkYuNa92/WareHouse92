@@ -1,0 +1,51 @@
+package basic;
+
+public class Condition_1 {
+
+	public static void main(String[] args) {
+		/*	int a =7;
+		float b = 4.3f;
+		if(a<b) System.out.println("출력 가능?");
+		//실행은 되지만 조건을 만족하지 않으므로 출력 불가능
+		
+		if(a<b) System.out.println("a가 b보다 작다");
+		else System.out.println("a가 b보다 크다");
+		
+		//문제3) 정수형 변수 선언 후 값을 대입하고 그 값이 3의 배수이면 3의 배수라고 출력하고 그렇지 않으면 3의 배수가 아니라고 출력하세요.
+		
+		int q = 9;
+		
+		if(q%3==0) System.out.println("3의 배수");
+		else System.out.println("3의 배수가 아니다");
+		*/
+		
+		//문제4) 국어, 영어, 수학 점수의 총합을 구하고 평균을 구하고 
+		//평균이 90점이상이면 수입니다. 80점이상이면 우입니다.출력
+		int x=30, y=20, z=80;
+		int sum = x+y+z;
+		int aver= sum/3;
+		//float aver=sum/3.0f;
+				
+		System.out.println("점수의 총합"+sum);
+		System.out.println("점수의 평균"+aver);
+		
+		if (aver>=90) {
+			System.out.println("수");
+		}
+		else if (aver>=80) {
+			System.out.println("우");					
+		}
+		else if (aver>=70) {
+			System.out.println("미");
+		}
+		else if (aver>=60) {
+				System.out.println("양");
+		}
+	    else {
+			System.out.println("나가");
+			}
+		
+	
+	}
+
+}
