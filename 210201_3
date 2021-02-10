@@ -1,0 +1,55 @@
+package basic;
+
+public class Operator {
+
+	public static void main(String[] args) {
+		int a = 3;
+		int x = a+5; //덧셈연산자
+		System.out.println(x);
+		
+		a= 7;
+		a = a+1;  //a+=1 <=> a++
+		a++; // a의 값을 하나 증가시킴 증가연산자
+		a=a+7;
+		a+=7;
+		
+		int b = 5;
+		int result = b%3; //나머지 연산자 modulo 연산자
+		int result1= 3*7; //곱하기 연산자
+		int result2= 5/2; //나누기 연산자
+		int result3= --b; //감소 연산자 (전위 연산자)
+		//int result3= b--; 후위 연산자는 먼저 대입을 하고 자기 자신의 값을 감소시킴
+		System.out.println("result3의 값은"+result3 +" b의 값은"+b);
+		
+		int result4 = 16>>2; //shift연산자(비트 연산자), 오른쪽으로 2비트 이동함
+		//오른쪽으로 1비트 이동하면 2로 나누고 2비트는 4로 3비트 8로 나눔 
+		
+		System.out.println(result4); 
+		result4 = 3<<2;  //shift 연산자ㅡ 왼쪽으로 2비트 4를 곱함
+		System.out.println(result4); 
+		
+		//비트란: binary digit를 말하고 binary는 2진을 의미하고 digit는 한개의 자리
+		// 189는 3개의 digit으로 구성됨
+		//위의 십진수 100의 자리 1, 10의 자리 8, 1의 자리 9
+		//binary(2개) 0(전원이 꺼졌다)과 1(전원이 켜졌다) 로만 구성됨
+		
+		//1010 1110 => 이해할 수 있는 언어로 변경하려면 10진수
+		//16진수로는 AE
+		//1*2^7 + 1*2^6 + 1*2^5 + ...+0*2^0
+		// 0000= 10진수로 0
+		//표현식?A:B 3항연산자
+		//대입연산자가 제일 마지막
+		boolean green = true;
+		boolean re_green = !green;
+		for (int i=0; i<10; i++) {
+			green=!green;
+			System.out.println("그린의 값은" +green+"인덱스 i"+i);
+		}
+		System.out.println(green);
+		green=!green;
+		System.out.println(green);
+		
+		
+		
+	}
+}
