@@ -1,0 +1,130 @@
+package CiaoEat;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;  //빨간 밑줄 컨트롤+시프트+O
+
+public class CiaoEat extends JFrame {
+	private Image bufferImage;
+	private Graphics screenGraphic;	
+	private Image backgroungImage = new ImageIcon("src/images/mainScreen.png").getImage();
+	private Image player = new ImageIcon("src/images/수박이.png").getImage();
+	private Image ciao = new ImageIcon("src/images/츄르.png").getImage();
+	
+	private int playerX, playerY;
+	private int playerWidth = player.getWidth(null);
+	private int playerheight = player.getHeight(null);
+	private int ciaoX, ciaoY;
+	private int ciaoWidth = ciao.getWidth(null);
+	private int ciaoheight = ciao.getHeight(null);
+	
+	private int score;
+	
+	private boolean up, down, left, right;
+	
+	public CiaoEat() {
+		setTitle("츄르 먹기 게임");
+		setVisible(true);
+		setSize(500, 500);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				switch(e.getKeyCode()) {
+				case KeyEvent.VK_W:
+					up = true;
+					break;
+				case KeyEvent.VK_S:
+					down = true;
+					break;
+				case KeyEvent.VK_A:
+					left = true;
+					break;
+				case KeyEvent.VK_D:
+					right = true;
+					break;
+			
+				}
+			}
+			
+			public void keyReleased(KeyEvent e) {
+				switch(e.getKeyCode()) {
+				case KeyEvent.VK_W:
+					up = false;
+					break;
+				case KeyEvent.VK_S:
+					down = false;
+					break;
+				case KeyEvent.VK_A:
+					left = false;
+					break;
+				case KeyEvent.VK_D:
+					right = false;
+					break;			
+				}
+			}			
+		});				
+		Init();
+		while (true) {
+			try {
+				Thread.sleep(20);
+			} catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+			keyProcess();
+			crashCheck();
+		}
+	}
+	
+	public void Init() {
+		score = 0;
+		
+		playerX = (500 - playerWidth)/2;
+		playerY = (500 - playerheight)/2;
+		
+		ciaoX = (int)(Math.random()*(501-playerWidth));
+		ciaoY = (int)(Math.random()*(501-playerheight-30))+30;
+	}
+	
+	public void keyProcess( ) {
+		if (up && playerY - 3 > 30) playerY-=3;
+		if (down && playerY + playerheight + 3 < 500) playerY+=3;
+		if (left && playerX - 3 > 0) playerX-=3;
+		if (right && playerX + playerWidth + 3 < 500) playerX+=3;
+	}
+	
+	public void crashCheck( ) {
+		if (playerX+playerWidth > ciaoX && ciaoX + ciaoWidth > playerX && playerY + playerheight > ciaoY && ciaoY + ciaoheight > playerY) {
+			score+=100;
+			ciaoX = (int)(Math.random()*(501-playerWidth));
+			ciaoY = (int)(Math.random()*(501-playerheight-30))+30;
+		}
+	}
+	
+	public void paint(Graphics g) {
+		bufferImage = createImage(500, 500);
+		screenGraphic = bufferImage.getGraphics();
+		screenDraw(screenGraphic);
+		g.drawImage(bufferImage, 0, 0, null);
+	}
+	
+	public void screenDraw(Graphics g) {
+		g.drawImage(backgroungImage, 0, 0, null);
+		g.drawImage(ciao, ciaoX, ciaoY, null);
+		g.drawImage(player, playerX, playerY, null);
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Arial", Font.BOLD, 40));
+		g.drawString("SCORE : "+score, 30, 80);
+		this.repaint();
+	}
+	
+	public static void main(String[] args) {
+		new CiaoEat();
+	}
+}
