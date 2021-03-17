@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+        let str="";
+        let cnt=0;
+        function color(){
+            let col=["00","11","22","33","44","55","66","77","88","99","aa","bb","cc","dd","ee","ff"];
+            let red= col[parseInt(Math.random()*16)];   //색상을 랜덤으로 가져옴
+            let green= col[parseInt(Math.random()*16)];
+            let blue= col[parseInt(Math.random()*16)];
+            str = "#"+red+green+blue;     //#11aa77 이런 식으로 랜덤색상 가져오기 가능
+            
+            $("button").css("background",str);  //버튼에 css를 입힌다
+                cnt++;                    
+                console.log(cnt+"초");       //  count를 표기
+                if(cnt==6){                 // 6초마다 초기화
+                    cnt=0;  
+                }
+
+        }
+        
+        $(document).ready(function(){
+            var timer=0;
+            
+            $("#start").click(function(){
+                timer = setInterval(color,1000);      //1초마다 버튼 색상 변경
+                
+            })
+            $("#stop").click(function(){              //id가 stop인 버튼을 누르면 타이머가 종료
+                clearInterval(timer);                    
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <button id="start">시작</button>
+    <button id="stop">종료</button>
+</body>
+</html>
