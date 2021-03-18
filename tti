@@ -1,0 +1,28 @@
+use sqldb;
+drop procedure if exists caseproc;
+delimiter $$
+create procedure caseproc(
+	in userName varchar(10)	-- 데이터를 받으면 in, 보내면 out
+    )
+begin
+	declare bYear int;
+    declare tti char(3);	-- 띠의 변수 선언
+    select birthYear into bYear from usertbl where name = userName;
+    case
+		when (bYear%12 =0) then set tti='원숭이';
+        when (bYear%12 =1) then set tti='닭';
+        when (bYear%12 =2) then set tti='개';
+        when (bYear%12 =3) then set tti='돼지';
+        when (bYear%12 =4) then set tti='쥐';
+        when (bYear%12 =5) then set tti='소';
+        when (bYear%12 =6) then set tti='호랑이';
+        when (bYear%12 =7) then set tti='토끼';
+        when (bYear%12 =8) then set tti='용';
+        when (bYear%12 =9) then set tti='뱀';
+        when (bYear%12 =10) then set tti='말';
+		else set tti = '양';
+	end case;
+    select (concat( userName, '의 띠 ==>', tti));
+end $$
+delimiter ;
+call caseproc('김범수');
