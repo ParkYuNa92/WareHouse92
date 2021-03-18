@@ -1,0 +1,30 @@
+drop table if exists gugutbl;
+create table gugutbl (id int auto_increment primary key ,txt varchar(500));	-- 구구단 저장 테이블	
+drop procedure if exists whileproc;
+delimiter $$
+create procedure whileproc()
+begin
+	declare str varchar(500);		-- 각 단을 문자열로 저장
+    declare i int;				-- 구구단 앞자리
+    declare k int;				-- 구구단 뒷자리
+    set i =2;					-- 2단부터 계산
+    while(i<10) do 				-- 바깥 반복문, 2단~ 9단
+		set str = '';			-- 각 단의 결과를 저장할 문자열 초기화
+        set k = 1;				-- 구구단 뒷자리는 항상 1부터 9까지 
+        while(k<10) do
+			set str = concat(str,' ',i,' X ',k,' = ',i*k,'  ');	-- 문자열 만들기
+            set k = k+1;		-- 뒷자리 증가
+		end while;
+    set i = i+1;				-- 앞자리 증가
+    insert into gugutbl values(null, str);	-- 각 단의 결과를 테이블에 입력 
+    end while;
+end $$
+delimiter ;
+call whileproc();
+select * from gugutbl;
+-- Stored Procedure의 장점 
+-- 1) 유지 관리가 간편하다
+-- 2) 모듈식 프로그래밍이 가능 
+-- 한 번 스토어드 프로시저를 생성해 놓으면 언제든지 실행이 가능하고, 스토어드 프로시저로 저장해놓은 쿼리의 수정, 삭제등의 관리 수월 
+-- 보안을 강화할 수 있다 
+-- usertbl에는 개인 정보가 있으므로 usertbl에는 권한을 주지 않고 procedure에만 접근 권한을 줌
