@@ -21,6 +21,7 @@ public class CharacterEncodingFilter implements Filter {
 	//필터 실행
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain next) throws IOException, ServletException {
 		request.setCharacterEncoding(config.getInitParameter("encoding"));
+		response.setCharacterEncoding(config.getInitParameter("encoding"));
 		next.doFilter(request, response); //다음 필터로 전달
 	}
 	//필터 실행되면 호출되는 초기화 메서드

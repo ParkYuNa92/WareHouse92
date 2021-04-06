@@ -8,7 +8,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import com.green.dao.MemberDao;
+import com.green.dao.MigumDao;
 import com.green.util.DBConnectionPool;
 
 @WebListener
@@ -27,13 +27,13 @@ public class ContextLoaderListener implements ServletContextListener {
     		System.out.println("리스너의 contextInitialized 호출됨 ");
     		ServletContext sc = event.getServletContext();
     		connPool = new DBConnectionPool(
-    				sc.getInitParameter("driver"),
-    				sc.getInitParameter("url"),
-    				sc.getInitParameter("username"),
-    				sc.getInitParameter("password"));
-			MemberDao memberDao = new MemberDao();
-			memberDao.setConnPool(connPool);
-			sc.setAttribute("memberDao", memberDao);
+    				"com.mysql.cj.jdbc.Driver",
+    				"jdbc:mysql://localhost/blue",
+    				"root",
+    				"1234");
+			MigumDao migumDao = new MigumDao();
+			migumDao.setConnPool(connPool);
+			sc.setAttribute("migumDao", migumDao);
     	} catch (Throwable e) {	//exception 에서 가장 높은 Throwable
     		e.printStackTrace();
     	}

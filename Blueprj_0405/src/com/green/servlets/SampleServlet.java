@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class SampleServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/sample/t.jsp");	//jsp에 연결하기
 		rd.forward(request, response);
 	}
